@@ -1,4 +1,4 @@
-from typing import Iterator
+from typing import Iterator, List, Optional
 from agno.agent import Agent, RunResponse
 from agno.models.anthropic import Claude
 from agno.storage.sqlite import SqliteStorage
@@ -7,6 +7,7 @@ from agno.tools.crawl4ai import Crawl4aiTools
 from app.agents.base_agent import BaseAgent
 from app.core import settings
 from agno.utils.pprint import pprint_run_response
+from fastapi import UploadFile
 import json
 
 class ClinicalDecisionAgent(BaseAgent):
@@ -230,6 +231,6 @@ class ClinicalDecisionAgent(BaseAgent):
     def run_clinical_decision_agent(self, patient_data) -> str:
         return self.analyze_clinical_case(patient_data)
     
-    def get_response(self, patient_data) -> str:
+    def get_response(self, patient_data: str, files: Optional[List[UploadFile]] = None) -> str:
         response = self.run_clinical_decision_agent(patient_data)
         return response

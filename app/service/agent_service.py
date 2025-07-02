@@ -8,7 +8,7 @@ from app.db.repository.agent_repository import AgentRepository
 from app.service.user_agent_run_service import UserAgentRunService
 from app.agents.agent_factory import AgentFactory
 import textwrap
-from fastapi import HTTPException
+from fastapi import HTTPException, UploadFile
 from app.agents.agent_prompt_repository import agent_prompt_repository
 from app.agents.enum.agent_enum import AgentType
 
@@ -59,7 +59,7 @@ class AgentService:
         created_agent = self.agent_repository.create(agent)
         return created_agent
 
-    def run_agent_by_id(self, agent_id: int, prompt: str, user_email: str) -> str:
+    def run_agent_by_id(self, agent_id: int, prompt: str, user_email: str, files: Optional[List[UploadFile]] = None) -> str:
         """Run an agent by ID with the given prompt"""
         
             # Validate inputs
@@ -79,7 +79,7 @@ class AgentService:
 
 
         user_agent_run = self.save_user_agent_run(user_email, agent_id)
-        response = agent.get_response(prompt)
+        response = agent.get_response(prompt, files)
             
             # Clean up response
         clean_response = textwrap.dedent(response).lstrip()

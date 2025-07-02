@@ -5,7 +5,8 @@ from agno.tools.googlesearch import GoogleSearchTools
 from app.agents.base_agent import BaseAgent
 from app.core import settings
 from agno.utils.pprint import pprint_run_response
-from typing import Iterator
+from typing import Iterator, List, Optional
+from fastapi import UploadFile
 
 
 class TechBlogWriterAgent(BaseAgent):
@@ -279,7 +280,7 @@ class TechBlogWriterAgent(BaseAgent):
             print(f"Error creating technical comparison: {e}")
             return f"# Error creating technical comparison: {e}"
 
-    def get_response(self, prompt: str) -> str:
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None) -> str:
         """
         Main interface method that handles different types of technical blog content requests
         """

@@ -1,11 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from pydantic import BaseModel
 from fastapi_utils.cbv import cbv
 
 from app.service.agent_service import AgentService
 from app.service import PdfService, EmailService
 from app.db.models import Agent
-from typing import Optional
+from typing import Optional, List
 
 
 router = APIRouter()
@@ -54,12 +54,39 @@ class AgentRouter:
 
 
     @router.post("/run-agent/{agent_id}")
-    def run_agent_by_id(self, agent_id: int, request: AgentRequest):
-        """Run an agent by ID with a given prompt"""
+    def run_agent_by_id(
+        self,
+        agent_id: int,
+        prompt: str = Form(...),
+        user_email: str = Form(...),
+        files: Optional[List[UploadFile]] = File(None)
+    ):
+        """
+        Run an agent by ID with a given prompt and optional files
+
+        Supported file types for AI Agent (Anthropic Claude):
+
+        Documents:
+        - PDF (.pdf)
+        - Text (.txt)
+        - CSV (.csv)
+        - Word Documents (.docx)
+        - JSON (.json)
+
+        Images:
+        - JPEG (.jpg, .jpeg)
+        - PNG (.png)
+        - GIF (.gif)
+        - WebP (.webp)
+
+        Note: File support varies by agent. AI Agent supports all listed types.
+        Other agents may ignore files or have limited support.
+        """
         response = self.agent_service.run_agent_by_id(
                 agent_id=agent_id,
-                prompt=request.prompt,
-                user_email=request.user_email
+                prompt=prompt,
+                user_email=user_email,
+                files=files
             )
         return {"response": response}
        

@@ -4,7 +4,8 @@ from agno.tools.reasoning import ReasoningTools
 from app.agents.base_agent import BaseAgent
 from app.core import settings
 from agno.utils.pprint import pprint_run_response
-from typing import Iterator
+from typing import Iterator, List, Optional
+from fastapi import UploadFile
 
 
 class LinkedInWriterAgent(BaseAgent):
@@ -166,7 +167,7 @@ class LinkedInWriterAgent(BaseAgent):
             print(f"Error optimizing LinkedIn post: {e}")
             return f"# Error optimizing post: {e}"
 
-    def get_response(self, prompt: str) -> str:
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None) -> str:
         """
         Main interface method that handles different types of LinkedIn content requests
         """
