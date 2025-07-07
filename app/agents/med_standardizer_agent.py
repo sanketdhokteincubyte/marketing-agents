@@ -16,6 +16,7 @@ import glob
 from pathlib import Path
 from datetime import datetime
 from app.service.email_service import EmailService
+import markdown
 
 # Constants
 FHIR_OUTPUT_DIR = "tmp/fhir_output"
@@ -182,21 +183,22 @@ class MedStandardizerAgent(BaseAgent):
     def create_output_formatting_agent(self):
         return Agent(
             name="Output Formatting Agent",
-            role="You are an expert at formatting final JSON responses with FHIR resources, confidence scores, and processing metadata",
-            model=Claude(id="claude-3-7-sonnet-20250219", max_tokens=8096),
+            role="You are an expert at creating concise summary reports since the detailed FHIR JSON is saved as a file attachment",
+            model=Claude(id="claude-3-7-sonnet-20250219", max_tokens=4096),
             tools=[FileTools(Path(FHIR_OUTPUT_DIR))],
             instructions=[
-                "Format final output as structured JSON with FHIR resources and metadata",
-                "Include all generated FHIR resources in proper JSON array format",
-                "Add overall confidence score (0-1) for the transformation quality",
-                "Include processing metadata: record count, processing time, transformation summary",
-                "Provide field-level confidence scores and quality indicators",
-                "Include transformation summary with successful mappings and issues",
-                "Format error messages and warnings in user-friendly manner",
-                "Ensure JSON output is properly formatted and valid",
-                "IMPORTANT: Reference the FHIR JSON file saved by the FHIR Resource Generation Agent",
-                "Use the read_file tool to access the complete FHIR resources for final formatting",
-                "Include a reference to the saved FHIR file location in the final output"
+                "Create a CONCISE summary report since the full FHIR JSON is saved as a file",
+                "DO NOT include the full FHIR resources in your output - they are in the saved file",
+                "Provide a brief executive summary with key metrics:",
+                "- Overall transformation confidence score (0-1)",
+                "- Number of records processed",
+                "- Number of FHIR resources generated (Patients, Observations, MedicationRequests)",
+                "- Key data quality indicators (completeness %, accuracy %)",
+                "- Critical issues or warnings (if any)",
+                "- File location of the complete FHIR JSON output",
+                "Keep the summary under 500 words - focus on actionable insights",
+                "Format as a clean, readable markdown report",
+                "Reference the saved FHIR file location for detailed review"
             ],
             show_tool_calls=True,
             stream=True,
@@ -284,7 +286,7 @@ class MedStandardizerAgent(BaseAgent):
             content = ""
             
             for response in response_stream:
-                content += (response.content + "\n") if hasattr(response, 'content') else ""
+                content += response.content if hasattr(response, 'content') else ""
                         
             pprint_run_response(response, markdown=True)
             print("✅ Medical Data Standardizer team analysis completed successfully.")
@@ -372,50 +374,60 @@ class MedStandardizerAgent(BaseAgent):
 
     def _create_email_body(self, content: str) -> str:
         """
-        Create HTML email body with summary of the transformation results
+        Create HTML email body by converting markdown content to HTML
 
         Args:
-            content: The full content from the agent
+            content: The markdown content from the agent
 
         Returns:
             HTML formatted email body
         """
-        # Extract key information from content for email summary
-        lines = content.split('\n')
-        summary_lines = []
+        try:
+            # Convert markdown content to HTML
+            html_content = markdown.markdown(
+                content,
+                extensions=['tables', 'fenced_code', 'nl2br']
+            )
 
-        # Look for key information in the content
-        for line in lines:
-            if any(keyword in line.lower() for keyword in [
-                'confidence', 'score', 'patient', 'observation', 'medication',
-                'fhir', 'resource', 'transformation', 'quality', 'complete'
-            ]):
-                summary_lines.append(line.strip())
-                if len(summary_lines) >= 10:  # Limit summary length
-                    break
+            # Wrap in a nice email template
+            email_body = f"""
+            <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
+                <h2 style="color: #2c5aa0;">🏥 Medical Data Standardization Results</h2>
+                <p>Your medical data has been successfully transformed to FHIR R4 standard format.</p>
 
-        summary_text = '<br>'.join(summary_lines) if summary_lines else "Medical data transformation completed successfully."
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2c5aa0;">
+                    {html_content}
+                </div>
 
-        email_body = f"""
-        <h2>🏥 Medical Data Standardization Results</h2>
-        <p>Your medical data has been successfully transformed to FHIR R4 standard format.</p>
+                <h3 style="color: #2c5aa0;">📎 Attachments:</h3>
+                <ul>
+                    <li><strong>FHIR JSON File:</strong> Contains the complete standardized medical data in FHIR R4 format</li>
+                </ul>
 
-        <h3>📊 Transformation Summary:</h3>
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 10px 0;">
-            {summary_text}
-        </div>
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #dee2e6;">
+                <p style="font-size: 12px; color: #6c757d; text-align: center;">
+                    <em>This email was generated automatically by MedStandardizer Pro.</em><br>
+                    For questions about this transformation, please contact your system administrator.
+                </p>
+            </div>
+            """
 
-        <h3>📎 Attachments:</h3>
-        <ul>
-            <li><strong>FHIR JSON File:</strong> Contains the standardized medical data in FHIR R4 format</li>
-        </ul>
+            return email_body
 
-        <p><em>This email was generated automatically by MedStandardizer Pro.</em></p>
+        except Exception as e:
+            # Fallback to simple HTML if markdown conversion fails
+            print(f"⚠️ Warning: Markdown conversion failed: {e}")
 
-        <hr>
-        <p style="font-size: 12px; color: #666;">
-            For questions about this transformation, please contact your system administrator.
-        </p>
-        """
-
-        return email_body
+            # Simple HTML fallback
+            simple_content = content.replace('\n', '<br>')
+            return f"""
+            <div style="font-family: Arial, sans-serif;">
+                <h2>🏥 Medical Data Standardization Results</h2>
+                <p>Your medical data has been successfully transformed to FHIR R4 standard format.</p>
+                <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                    {simple_content}
+                </div>
+                <p><strong>📎 FHIR JSON File attached</strong></p>
+                <p><em>This email was generated automatically by MedStandardizer Pro.</em></p>
+            </div>
+            """
