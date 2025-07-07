@@ -4,6 +4,7 @@ from .tech_blog_writer_agent import TechBlogWriterAgent
 from .lifestyle_blog_writer_agent import LifestyleBlogWriterAgent
 from .med_standardizer_agent import MedStandardizerAgent
 from .image_ner_agent import ImageNERAgent
+from .hl7_to_fhir_agent import HL7ToFHIRAgent
 
 __all__ = [
     "MarketingAgent",
@@ -11,5 +12,6 @@ __all__ = [
     "TechBlogWriterAgent",
     "LifestyleBlogWriterAgent",
     "MedStandardizerAgent",
-    "ImageNERAgent"
+    "ImageNERAgent",
+    "HL7ToFHIRAgent"
 ]

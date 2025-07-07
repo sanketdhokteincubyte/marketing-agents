@@ -7,6 +7,7 @@ from app.agents.lifestyle_blog_writer_agent import LifestyleBlogWriterAgent
 from app.agents.clinical_decision_agents import ClinicalDecisionAgent
 from app.agents.med_standardizer_agent import MedStandardizerAgent
 from app.agents.image_ner_agent import ImageNERAgent
+from app.agents.hl7_to_fhir_agent import HL7ToFHIRAgent
 from app.agents.enum.agent_enum import AgentType
 
 
@@ -20,6 +21,7 @@ class AgentFactory:
         AgentType.CLINICAL_DECISION_AGENT: ClinicalDecisionAgent,
         AgentType.MED_STANDARDIZER_AGENT: MedStandardizerAgent,
         AgentType.IMAGE_NER_AGENT: ImageNERAgent,
+        AgentType.HL7_TO_FHIR_AGENT: HL7ToFHIRAgent,
     }
 
     @staticmethod

@@ -21,3 +21,4 @@ class AgentType(Enum):
     CLINICAL_DECISION_AGENT = "safety-insights"
     MED_STANDARDIZER_AGENT = "med-standardizer-agent"
     IMAGE_NER_AGENT = "image-ner-agent"
+    HL7_TO_FHIR_AGENT = "hl7-to-fhir-agent"
