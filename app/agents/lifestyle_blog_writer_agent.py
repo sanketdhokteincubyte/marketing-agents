@@ -328,7 +328,7 @@ class LifestyleBlogWriterAgent(BaseAgent):
             print(f"Error generating lifestyle chat response: {e}")
             return f"I'm sorry, I'm having trouble responding right now. Could you try asking again?"
 
-    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None) -> str:
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None, user_email: Optional[str] = None) -> str:
         """
         Main interface method that handles different types of lifestyle content requests
         """

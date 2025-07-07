@@ -167,7 +167,7 @@ class LinkedInWriterAgent(BaseAgent):
             print(f"Error optimizing LinkedIn post: {e}")
             return f"# Error optimizing post: {e}"
 
-    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None) -> str:
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None, user_email: Optional[str] = None) -> str:
         """
         Main interface method that handles different types of LinkedIn content requests
         """

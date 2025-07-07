@@ -19,3 +19,4 @@ class AgentType(Enum):
     MEDICATION_INTERACTION_MONITOR_AGENT = "drug-interaction-assessment"
     LOCATION_HEALTH_INTELLIGENCE_AGENT = "geo-health-alerts"
     CLINICAL_DECISION_AGENT = "safety-insights"
+    MED_STANDARDIZER_AGENT = "med-standardizer-agent"

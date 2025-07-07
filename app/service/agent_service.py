@@ -79,7 +79,7 @@ class AgentService:
 
 
         user_agent_run = self.save_user_agent_run(user_email, agent_id)
-        response = agent.get_response(prompt, files)
+        response = agent.get_response(prompt, files, user_email)
             
             # Clean up response
         clean_response = textwrap.dedent(response).lstrip()

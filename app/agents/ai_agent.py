@@ -33,7 +33,7 @@ class AIAgent(BaseAgent):
             markdown=markdown,
         )
 
-    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None):
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None, user_email: Optional[str] = None):
         # Define supported file types for Anthropic Claude
         DOCUMENT_TYPES = {
             'application/pdf',

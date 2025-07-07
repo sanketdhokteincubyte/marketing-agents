@@ -280,7 +280,7 @@ class TechBlogWriterAgent(BaseAgent):
             print(f"Error creating technical comparison: {e}")
             return f"# Error creating technical comparison: {e}"
 
-    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None) -> str:
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None, user_email: Optional[str] = None) -> str:
         """
         Main interface method that handles different types of technical blog content requests
         """

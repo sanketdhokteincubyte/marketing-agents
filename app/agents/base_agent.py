@@ -4,5 +4,5 @@ from fastapi import UploadFile
 
 class BaseAgent(ABC):
     @abstractmethod
-    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None) -> str:
+    def get_response(self, prompt: str, files: Optional[List[UploadFile]] = None, user_email: Optional[str] = None) -> str:
         pass

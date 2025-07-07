@@ -377,7 +377,7 @@ class MarketingAgent(BaseAgent):
     def run_marketing_agent(self, url: str) -> str:
         return self.review_marketing_website(url)
     
-    def get_response(self, url: str, files: Optional[List[UploadFile]] = None) -> str:
+    def get_response(self, url: str, files: Optional[List[UploadFile]] = None, user_email: Optional[str] = None) -> str:
         print(f"Getting response for URL: {url}")
         response = self.run_marketing_agent(url)
         print("Response received successfully.")
