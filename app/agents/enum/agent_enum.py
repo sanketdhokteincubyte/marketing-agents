@@ -20,5 +20,6 @@ class AgentType(Enum):
     LOCATION_HEALTH_INTELLIGENCE_AGENT = "geo-health-alerts"
     CLINICAL_DECISION_AGENT = "safety-insights"
     MED_STANDARDIZER_AGENT = "med-standardizer-agent"
+    MED_STANDARDIZER_SINGLE_AGENT = "med-standardizer-single-agent"
     IMAGE_NER_AGENT = "image-ner-agent"
     HL7_TO_FHIR_AGENT = "hl7-to-fhir-agent"

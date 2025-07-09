@@ -66,7 +66,19 @@ def seed_test_database(engine):
                     description="General purpose AI assistant for various tasks",
                     image="ai-agent.png"
                 ),
-                
+                Agent(
+                    name="Med Standardizer Single Agent",
+                    slug="med-standardizer-single-agent",  # Matches AgentType.MED_STANDARDIZER_SINGLE_AGENT
+                    description="Fast single-agent version for medical data transformation to FHIR R4 format",
+                    image="med-standardizer-single.png"
+                ),
+                Agent(
+                    name="HL7 to FHIR Agent",
+                    slug="hl7-to-fhir-agent",  # Matches AgentType.HL7_TO_FHIR_AGENT
+                    description="Specialized agent for transforming HL7 messages to FHIR R4 format",
+                    image="hl7-fhir-agent.png"
+                ),
+
                 # Edge case agents for testing various scenarios (these will cause prompt errors but are useful for other tests)
                 Agent(
                     name="Test Agent with Long Name for Boundary Testing",
@@ -98,7 +110,7 @@ def seed_test_database(engine):
             agent_count = session.execute(text("SELECT COUNT(*) FROM agents")).fetchone()[0]
             print(f"Successfully seeded {agent_count} agents to test database")
             
-            return len(sample_agents)  # Returns 8 agents total
+            return len(sample_agents)  # Returns 10 agents total
             
     except ImportError as e:
         print(f"Could not import models: {e}")

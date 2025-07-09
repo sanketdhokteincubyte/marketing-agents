@@ -1,0 +1,86 @@
+PATIENT INFORMATION:
+Name: Mary Smith
+Date of Birth: 05/12/1975
+Medical Record Number: 54321
+Gender: Female
+Address: 456 Oak Avenue, Chicago, IL 60601
+Phone: 555-987-6543
+Email: mary.smith@email.com
+
+VISIT DATE: January 15, 2024
+PROVIDER: Dr. Jennifer Wilson, MD
+
+CHIEF COMPLAINT:
+Routine follow-up for diabetes and hypertension management.
+
+CURRENT MEDICATIONS:
+1. Metformin 500mg PO BID (twice daily) - for Type 2 Diabetes
+2. Lisinopril 10mg PO daily - for Hypertension  
+3. Atorvastatin 20mg PO daily - for Hyperlipidemia
+4. Aspirin 81mg PO daily - for cardiovascular protection
+
+ALLERGIES:
+- Sulfa drugs (causes rash)
+- Shellfish (anaphylaxis)
+
+VITAL SIGNS:
+- Blood Pressure: 145/92 mmHg (elevated)
+- Heart Rate: 88 bpm (regular)
+- Temperature: 98.6°F (normal)
+- Respiratory Rate: 16/min
+- Oxygen Saturation: 98% on room air
+- Weight: 165 lbs
+- Height: 5'6" (66 inches)
+- BMI: 26.6 (overweight)
+
+RECENT LAB RESULTS (January 10, 2024):
+- HbA1c: 7.2% (target <7.0%)
+- Fasting Glucose: 135 mg/dL (elevated)
+- Total Cholesterol: 220 mg/dL
+- LDL Cholesterol: 140 mg/dL (elevated)
+- HDL Cholesterol: 45 mg/dL
+- Triglycerides: 175 mg/dL
+- Creatinine: 1.0 mg/dL (normal)
+- eGFR: 85 mL/min/1.73m² (normal)
+
+PHYSICAL EXAMINATION:
+- General: Alert, oriented, no acute distress
+- Cardiovascular: Regular rate and rhythm, no murmurs
+- Pulmonary: Clear to auscultation bilaterally
+- Extremities: No edema, pulses intact
+
+ASSESSMENT AND PLAN:
+1. Type 2 Diabetes Mellitus (E11.9)
+   - HbA1c slightly elevated at 7.2%
+   - Continue Metformin 500mg BID
+   - Consider adding second agent if no improvement in 3 months
+   - Diabetes education reinforcement
+   - Follow-up in 3 months
+
+2. Essential Hypertension (I10)
+   - Blood pressure elevated at 145/92
+   - Increase Lisinopril to 15mg daily
+   - Home blood pressure monitoring
+   - Follow-up in 4 weeks
+
+3. Hyperlipidemia (E78.5)
+   - LDL elevated at 140 mg/dL
+   - Continue Atorvastatin 20mg daily
+   - Dietary counseling
+   - Recheck lipids in 6 weeks
+
+4. Cardiovascular Risk Reduction
+   - Continue aspirin 81mg daily
+   - Lifestyle modifications: diet and exercise
+   - Weight loss goal: 10-15 pounds
+
+FOLLOW-UP:
+- Return visit in 4 weeks for blood pressure check
+- Lab work in 6 weeks (lipid panel)
+- Comprehensive visit in 3 months with HbA1c
+
+PATIENT EDUCATION:
+- Discussed importance of medication compliance
+- Reviewed dietary modifications for diabetes and hypertension
+- Encouraged regular exercise (30 minutes, 5 days per week)
+- Provided diabetes self-management resources

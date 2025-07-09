@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PatientRecord>
+    <patient_number>98765</patient_number>
+    <fname>Sarah</fname>
+    <lname>Johnson</lname>
+    <birth_dt>1990-07-22</birth_dt>
+    <sex>F</sex>
+    <ssn>987-65-4321</ssn>
+    <address>
+        <street>123 Main St</street>
+        <city>Springfield</city>
+        <state>IL</state>
+        <zip>62701</zip>
+        <country>USA</country>
+    </address>
+    <contact>
+        <phone>555-123-4567</phone>
+        <email>sarah.johnson@email.com</email>
+        <emergency_contact>
+            <name>Michael Johnson</name>
+            <relationship>Spouse</relationship>
+            <phone>555-123-4568</phone>
+        </emergency_contact>
+    </contact>
+    <insurance>
+        <provider>Aetna</provider>
+        <policy_number>AET123456789</policy_number>
+        <group_number>GRP001</group_number>
+    </insurance>
+    <medical_history>
+        <condition>Hypertension</condition>
+        <condition>Type 2 Diabetes</condition>
+        <allergy>Penicillin</allergy>
+    </medical_history>
+    <current_medications>
+        <medication>
+            <name>Lisinopril</name>
+            <dosage>10mg</dosage>
+            <frequency>Daily</frequency>
+        </medication>
+        <medication>
+            <name>Metformin</name>
+            <dosage>500mg</dosage>
+            <frequency>Twice daily</frequency>
+        </medication>
+    </current_medications>
+</PatientRecord>
